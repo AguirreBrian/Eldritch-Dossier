@@ -1,4 +1,4 @@
-const CACHE_NAME = 'eldritch-archive-v1';
+const CACHE_NAME = 'eldritch-archive-v2';
 const urlsToCache = [
   './index.html',
   './logo.png',
@@ -43,8 +43,29 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - Network first for HTML, cache first for others
 self.addEventListener('fetch', (event) => {
+  // Network-first strategy for HTML files to ensure CSS updates
+  if (event.request.url.includes('.html') || event.request.url.endsWith('/')) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          // Clone and cache the response
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+          return response;
+        })
+        .catch(() => {
+          // Fallback to cache if network fails
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+
+  // Cache-first strategy for other resources
   event.respondWith(
     caches.match(event.request)
       .then((response) => {

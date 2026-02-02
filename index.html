@@ -12,8 +12,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Eldritch Archive">
     
+    <meta name="theme-color" content="#0B1120">
     <!-- Manifest -->
     <link rel="manifest" href="./manifest.json">
+    
+    <!-- Cache busting for styles -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     
     <!-- Icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="./logo.png">
@@ -840,7 +846,8 @@
             object-fit: contain;
             border-radius: 5px;
             margin-bottom: 20px;
-            background: var(--bg-secondary);
+            background: #1a2332;
+            opacity: 1;
         }
 
         .modal-title {
@@ -932,7 +939,7 @@
         /* Criaturas Detalles mobile */
         .creature-detail-view {
             padding: 0 4vw 40px;
-            margin-top: -230px; /* Bring content closer to nav */
+            margin-top: -250px; /* Bring content closer to nav */
         }
 
         .creature-detail-content {
@@ -942,6 +949,13 @@
             border: 2px solid var(--glass-border);
             border-radius: 10px;
             padding: 40px;
+        }
+
+        /* Fix image display on mobile creature detail view */
+        #creature-detail .modal-image {
+            opacity: 1 !important;
+            background: none !important;
+            display: block;
         }
 
         /* Mobile Responsive */
