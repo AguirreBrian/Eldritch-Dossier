@@ -64,6 +64,8 @@
         --danger-medium: #fbbf24;
         --danger-high: #f97316;
         --danger-extreme: #ef4444;
+        --danger-very-high: #a855f7;
+        --danger-absolute: #000000;
       }
 
       body {
@@ -518,6 +520,13 @@
       }
       .danger-Extremo {
         background: var(--danger-extreme);
+      }
+      .danger-Muy\ Alto {
+        background: var(--danger-very-high);
+      }
+      .danger-Absoluto {
+        background: var(--danger-absolute);
+        color: white;
       }
 
       /* Editor View */
@@ -1187,6 +1196,8 @@
             <option value="Medio">Medio</option>
             <option value="Alto">Alto</option>
             <option value="Extremo">Extremo</option>
+            <option value="Muy Alto">Muy Alto</option>
+            <option value="Absoluto">Absoluto</option>
           </select>
         </div>
         <div id="creatures-container" class="creatures-grid"></div>
@@ -1284,9 +1295,9 @@
               <option value="Bajo">Bajo</option>
               <option value="Medio">Medio</option>
               <option value="Alto">Alto</option>
-              <option value="Extremo">Muy Alto</option>
               <option value="Extremo">Extremo</option>
-              <option value="Extremo">Absoluto</option>
+              <option value="Muy Alto">Muy Alto</option>
+              <option value="Absoluto">Absoluto</option>
             </select>
           </div>
 
