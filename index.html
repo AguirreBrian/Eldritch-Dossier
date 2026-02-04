@@ -1677,9 +1677,15 @@
           const now = new Date().toLocaleString("es-ES");
           localStorage.setItem("last_sync", now);
           updateLastSyncDisplay(now);
+          
+          // Count only active creatures for display
+          const activeCount = mergedCreatures.filter(c => c.status !== "deleted").length;
+          const activeLocal = localCreatures.filter(c => c.status !== "deleted").length;
+          const activeRemote = remoteCreatures.filter(c => c.status !== "deleted").length;
+          
           updateSyncStatus(
             "success",
-            `✅ Sincronizado: ${mergedCreatures.length} criaturas (${localCreatures.length} local + ${remoteCreatures.length} remoto)`,
+            `✅ Sincronizado: ${activeCount} criaturas activas (${activeLocal} local + ${activeRemote} remoto)`,
           );
 
           // Refresh display if in explorer view
@@ -1689,7 +1695,7 @@
             await displayCreatures();
           }
 
-          return mergedCreatures.length;
+          return activeCount; // Return only active creatures count
         } catch (error) {
           console.error("Pull error:", error);
           updateSyncStatus(
@@ -1787,12 +1793,16 @@
           const now = new Date().toLocaleString("es-ES");
           localStorage.setItem("last_sync", now);
           updateLastSyncDisplay(now);
+          
+          // Count only active creatures for display
+          const activeCount = mergedCreatures.filter(c => c.status !== "deleted").length;
+          
           updateSyncStatus(
             "success",
-            `✅ ${mergedCreatures.length} criaturas sincronizadas y subidas`,
+            `✅ ${activeCount} criaturas activas sincronizadas y subidas`,
           );
 
-          return mergedCreatures.length;
+          return activeCount; // Return only active creatures count
         } catch (error) {
           console.error("Push error:", error);
           updateSyncStatus("error", `Error al subir: ${error.message}`, true);
